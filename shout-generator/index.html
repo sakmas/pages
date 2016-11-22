@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shout Generator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style>
+      textarea {
+        font-family: Osaka-mono, "MS Gothic", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-sm-9 col-sm-offset-1" role="main">
+        <h2>Shout Generator</h2>
+        <hr>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="message" class="col-sm-2 control-label">Input</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="message" autofocus>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="radio">
+                <label><input type="radio" name="target" value="s" checked="checked"/>Say</label>
+              </div>
+              <div class="radio">
+                <label><input type="radio" name="target" value="y"/>Yell</label>
+              </div>
+              <div class="radio">
+                <label><input type="radio" name="target" value="sh"/>Shout</label>
+              </div>
+              <div class="radio">
+                <label><input type="radio" name="target" value="t"/>Tell</label>
+              </div>
+              <div id="pcName" class="row">
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" placeholder="PC name">
+                </div>
+              </div>
+              <div class="radio">
+                <label><input type="radio" name="target" value="p"/>Party</label>
+              </div>
+              <div class="radio">
+                <label><input type="radio" name="target" value="a"/>Alliance</label>
+              </div>
+              <div class="radio">
+                <label><input type="radio" name="target" value="fc"/>FreeCompany</label>
+              </div>
+              <div class="radio">
+                <label><input type="radio" name="target" value="l"/>LinkShell</label>
+              </div>
+              <div id="lsNum" class="row">
+                <div class="col-sm-2">
+                  <select class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="result" class="col-sm-2 control-label">Result</label>
+            <div class="col-sm-10">
+              <textarea type="text" class="form-control" id="result" rows="6"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+      <script type="text/javascript">
+        $(function() {
+          var $message = $("#message"),
+              $target = $("input[name='target']:radio"),
+              $pcName = $("#pcName"),
+              $lsNum = $("#lsNum"),
+              $result = $("#result"),
+              $pcNameInput = $pcName.find("input"),
+              $lsNumSelect = $lsNum.find("select");
+
+          $pcName.hide();
+          $lsNum.hide();
+
+          function createTarget() {
+            var val = $target.filter(":checked").val();
+            var target = "/" + val;
+            target += val == "t" ? " " + $pcNameInput.val() : "";
+            target += val == "l" ? $lsNumSelect.val() : "";
+            return target;
+          }
+
+          function createShout(message) {
+            var _byteSize = 0;
+            for (var i = 0, len = message.length; i < len; ++i) {
+              _byteSize += /[^\x01-\x7E]/.test(message[i]) ? 1 : 0.5;
+            }
+            var byteSize = Math.floor(++_byteSize);
+            var topLine = ["＿", "＿"].join("人".repeat(byteSize));
+            var mainLine = ["＞", message, "＜"].join(" ");
+            var bottomLine = ["￣", "￣"].join("Y^".repeat(byteSize));
+            return [topLine, mainLine, bottomLine];
+          }
+
+          function exec() {
+            var message = $message.val();
+            if (message == "") { $result.val(""); return; }
+            var target = createTarget();
+            var shoutLineList = $.map(createShout(message), function(line) {
+              return [target, line].join(" ");
+            });
+            $result.val(shoutLineList.join("\n"));
+          }
+
+          $target.change(function() {
+            var val = $(this).val();
+            if (val == "t" && $(this).prop("checked")) {
+              $pcName.show('fast');
+            } else {
+              $pcName.hide('fast');
+            }
+            if (val == "l" && $(this).prop("checked")) {
+              $lsNum.show('fast');
+            } else {
+              $lsNum.hide('fast');
+            }
+            exec();
+          });
+          $message.keyup(function() {
+            exec();
+          });
+          $pcNameInput.keyup(function() {
+            exec();
+          });
+          $lsNumSelect.change(function() {
+            exec();
+          });
+          $result.focus(function() {
+            $(this).select();
+          });
+        });
+      </script>
+    </div>
+  </body>
+</html>
