@@ -57,6 +57,7 @@
     wrapper.appendChild(applyBtn);
     wrapper.appendChild(howtouse);
     targetDialog.appendChild(wrapper);
+    wrapper.scrollIntoView(false);
   };
 
   if (!document.querySelector('#_wrapper') &&
