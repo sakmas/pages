@@ -4,7 +4,8 @@
     style.innerHTML = '#_wrapper{border:1px solid #787878;padding:10px;margin:20px 0px 10px 0px;}#_result{height:4em;width:100%;overflow:hidden;margin:5px 0px;}';
     document.head.appendChild(style);
 
-    var targetDialog = document.getElementsByClassName('dialogContents')[0];
+    var targetDialog = document.querySelector('.dialogContents') ||
+      document.querySelector('.matometePoint .boxWhite');
 
     var wrapper = document.createElement('div');
     wrapper.id = '_wrapper';
@@ -29,11 +30,12 @@
     applyBtn.type = 'button';
     applyBtn.value = '適用';
     applyBtn.onclick = function() {
-      var inputLines = document.getElementsByClassName('inputSection');
+      var inputLines = document.querySelectorAll('.inputSection');
+      inputLines = inputLines.length === 0 ? document.querySelectorAll('.serialMatometeInput') : inputLines;
       var index = 0;
       result.value.split('\n').forEach(function(line) {
         if (!line || index >= 5) { return; }
-        var num = inputLines[index].getElementsByTagName('input');
+        var num = inputLines[index].querySelectorAll('input');
         var code = line.split('-');
         num[0].value = code[0] || '';
         num[1].value = code[1] || '';
@@ -50,8 +52,8 @@
     targetDialog.appendChild(wrapper);
   };
 
-  if (!document.getElementById('_wrapper') &&
-    document.getElementsByClassName('ui-dialog')[1].style.display === 'block') {
+  if (!document.querySelector('#_wrapper') &&
+    document.querySelectorAll('.ui-dialog')[1].style.display === 'block') {
     var script = document.createElement('script');
     script.src = 'https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js';
     script.onload = onload;
