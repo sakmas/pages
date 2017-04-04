@@ -46,9 +46,16 @@
       targetDialog.removeChild(wrapper);
     };
 
+    var howtouse = document.createElement('div');
+    howtouse.innerHTML = '<br><p><strong>使い方</strong></p>' +
+      '<p>(1) 「ファイルを選択」ボタンでシリアルナンバーが写った画像を選択する。スマートフォンの場合は撮影も可能。</p>' +
+      '<p>(2) 自動的に解析が開始し、結果が入力欄に表示される。誤りがある場合は手で修正する。</p>' +
+      '<p>(3) 「適用」ボタンで自動的にシリアルナンバー入力欄に反映される。</p>';
+
     wrapper.appendChild(input);
     wrapper.appendChild(result);
     wrapper.appendChild(applyBtn);
+    wrapper.appendChild(howtouse);
     targetDialog.appendChild(wrapper);
   };
 
