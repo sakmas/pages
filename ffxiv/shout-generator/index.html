@@ -80,6 +80,11 @@
               <textarea type="text" class="form-control" id="result" rows="6"></textarea>
             </div>
           </div>
+          <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+              <button type="button" class="btn btn-info btn-xs" id="copy">Copy to clipboard</button>
+            </div>
+          </div>
         </form>
       </div>
 
@@ -91,6 +96,7 @@
               $pcName = $("#pcName"),
               $lsNum = $("#lsNum"),
               $result = $("#result"),
+              $copy = $("#copy"),
               $pcNameInput = $pcName.find("input"),
               $lsNumSelect = $lsNum.find("select");
 
@@ -153,6 +159,12 @@
           });
           $result.focus(function() {
             $(this).select();
+          });
+
+          $copy.click(function() {
+            $result.select();
+            document.execCommand("copy");
+            $result.blur();
           });
         });
       </script>
