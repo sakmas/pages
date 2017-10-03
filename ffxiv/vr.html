@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+<div id="vrview"></div>
+<script src="//storage.googleapis.com/vrview/2.0/build/vrview.min.js"></script>
+<script>
+  window.addEventListener('load', onVrViewLoad)
+  function onVrViewLoad() {
+    var vrView = new VRView.Player('#vrview', {
+      image: 'FINAL FANTASY XIV 2017_10_03 22_40_31_stitch.jpg', //画像を埋め込みたい場合。値にパスを指定。
+      width: '100%', //コンテンツの幅を指定。
+      height: '100%', //コンテンツの高さを指定。
+    });
+  }
+</script>
+</body>
+</html>
