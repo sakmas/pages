@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Open Window</title>
+  </head>
+  <body>
+    <div class="container">
+      <p>
+        <button id="window-open">window.open</button>
+      </p>
+      <p>
+        <button id="window-location-href">window.location.href</button>
+      </p>
+    </div>
+
+    <script>
+      document.querySelector("#window-open").addEventListener("click", () => {
+        window.open(window.location.hostname + "/sample/sub.html", "sub");
+      });
+
+      document.querySelector("#window-location-href").addEventListener("click", () => {
+      });
+
+    </script>
+  </body>
+</html>
