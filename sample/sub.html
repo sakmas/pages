@@ -8,19 +8,61 @@
   <body>
     <div class="container">
       <p>Sub Window</p>
-      <p>Name: <span id="name"></span></p>
       <p>
-        <button id="window-open">window.open</button>
+        <button id="window-openA">window.open [WindowA]</button>
+      </p>
+      <p>
+        <button id="window-openB">window.open [WindowB]</button>
       </p>
     </div>
 
     <script>
-      document.querySelector("#name").textContent = window.name;
 
-      document.querySelector("#window-open").addEventListener("click", () => {
-        window.open("subsub.html", "windowA");
+
+      function getCookie(key) {
+        return document.cookie.replace(new RegExp("(?:(?:^|.*;\\s*)" + key + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1");
+      }
+
+      function addCookie(key, value) {
+        var values = getCookie(key);
+        if (values === "") {
+          values = [value];
+        } else {
+          var values = values.split(",");
+          values.push(value);
+        }
+        document.cookie = key + "=" + values.join(",")
+      }
+
+      function removeCookie(key, value) {
+        var cookie = getCookie(key).split(",");
+        cookie = cookie.filter(function(val) { return val != value });
+        document.cookie = key + "=" + cookie.join(",");
+      }
+
+      function isOpened(windowName) {
+        getCookie("sub_window").split(",").indexOf(windowName) >= 0;
+      }
+
+      function openSubWindow(target, name) {
+        addCookie("sub_window", name);
+        var subWindow = window.open(target, name);
+        subWindow.addEventListener("beforeunload", function() {
+          removeCookie("sub_window", name);
+        });
+      }
+
+
+      document.querySelector("#window-openA").addEventListener("click", () => {
+        if (!isOpened("windowA")) {
+          openSubWindow("subsub.html", "windowA");
+          console.log(document.cookie);
+        }
       });
 
+      document.querySelector("#window-openB").addEventListener("click", () => {
+        window.open("subsub.html", "windowB");
+      });
 
     </script>
   </body>
