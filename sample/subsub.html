@@ -22,7 +22,7 @@
       document.cookie = key + "=" + cookie.join(",");
     }
 
-    subWindow.addEventListener("beforeunload", function() {
+    window.addEventListener("beforeunload", function() {
       removeCookie("sub_window", window.name);
     });
 
