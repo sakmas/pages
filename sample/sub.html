@@ -14,6 +14,7 @@
       <p>
         <button id="window-openB">window.open [WindowB]</button>
       </p>
+      <p>Cookie: <span id="cookie"></p>
     </div>
 
     <script>
@@ -63,6 +64,8 @@
           console.log(document.cookie);
         }
       });
+
+      document.querySelector("#cookie").textContent = document.cookie;
 
     </script>
   </body>
