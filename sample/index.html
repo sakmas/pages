@@ -16,8 +16,10 @@
     </div>
 
     <script>
+      let sub;
       document.querySelector("#window-open").addEventListener("click", () => {
-        window.open("sub.html", "sub");
+        sub = window.open("sub.html", "sub");
+        console.log(sub);
       });
 
       document.querySelector("#window-location-href").addEventListener("click", () => {

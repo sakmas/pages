@@ -3,10 +3,30 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>sub-window</title>
+    <title>sub window</title>
   </head>
   <body>
     <div class="container">
-      <p>sub window</p>
+      <p>Sub Window</p>
+      <p>
+        <button id="window-open">window.open</button>
+      </p>
+      <p>
+        <button id="window-location-href">window.location.href</button>
+      </p>
+    </div>
+
+    <script>
+      let sub;
+      document.querySelector("#window-open").addEventListener("click", () => {
+        sub = window.open("subsub.html", "subsub");
+        console.log(sub);
+      });
+
+      document.querySelector("#window-location-href").addEventListener("click", () => {
+        window.location.href = "subsub.html";
+      });
+
+    </script>
   </body>
 </html>
