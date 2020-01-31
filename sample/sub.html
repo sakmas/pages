@@ -47,10 +47,6 @@
       function openSubWindow(target, name) {
         addCookie("sub_window", name);
         window.open(target, name);
-//        var subWindow = window.open(target, name);
-//        subWindow.addEventListener("beforeunload", function() {
-//          removeCookie("sub_window", name);
-//        });
       }
 
 
@@ -62,7 +58,10 @@
       });
 
       document.querySelector("#window-openB").addEventListener("click", () => {
-        window.open("subsub.html", "windowB");
+        if (!isOpened("windowB")) {
+          openSubWindow("subsub.html", "windowB");
+          console.log(document.cookie);
+        }
       });
 
     </script>
