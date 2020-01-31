@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>sub window</title>
+    <title>Start Window</title>
   </head>
   <body>
     <div class="container">
-      <p>起動画面</p>
+      <p>Start Window</p>
       <p>window名: <span id="window-name"></span></p>
       <p>
         <button id="window-open">window.open</button>
@@ -16,7 +16,7 @@
     </div>
 
     <script>
-      var cookieKey = "sub_window";
+      var cookieKey = "window";
       var windowName = window.location.href.match(new RegExp("[?&]window=(.*?)(&|$|#)"))[1];
 
       function getCookie(key) {
@@ -44,14 +44,14 @@
         return getCookie(cookieKey).split(",").indexOf(windowName) >= 0;
       }
 
-      function openSubWindow(target, name) {
+      function openWindow(target, name) {
         addCookie(cookieKey, name);
         window.open(target, name);
       }
 
       document.querySelector("#window-open").addEventListener("click", () => {
         if (!isOpened(windowName)) {
-          openSubWindow("subsub.html", windowName);
+          openWindow("main.html", windowName);
         }
         window.close();
       });

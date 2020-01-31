@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Open Window</title>
+    <title>Portal Window</title>
   </head>
   <body>
     <div class="container">
+      <p>Portal Window</p>
       <p>
         <button id="window-openA">window.open [WindowA]</button>
       </p>
@@ -17,11 +18,11 @@
 
     <script>
       document.querySelector("#window-openA").addEventListener("click", function() {
-        window.open("sub.html?window=windowA", "");
+        window.open("start.html?window=windowA", "");
       });
 
       document.querySelector("#window-openB").addEventListener("click", function() {
-        window.open("sub.html?window=windowB", "");
+        window.open("start.html?window=windowB", "");
       });
 
     </script>

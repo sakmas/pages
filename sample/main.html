@@ -3,18 +3,18 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>window A</title>
+    <title>Main Window</title>
   </head>
   <body>
     <div class="container">
-      <p>sub window</p>
+      <p>Main Window</p>
       <p>Name: <span id="name"></span></p>
 
       <p>Cookie: <span id="cookie"></p>
     </div>
 
     <script>
-      var cookieKey = "sub_window";
+      var cookieKey = "window";
 
       function getCookie(key) {
         return document.cookie.replace(new RegExp("(?:(?:^|.*;\\s*)" + key + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1");
