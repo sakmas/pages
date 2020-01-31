@@ -8,24 +8,19 @@
   <body>
     <div class="container">
       <p>Sub Window</p>
+      <p>Name: <span id="name"></span></p>
       <p>
         <button id="window-open">window.open</button>
-      </p>
-      <p>
-        <button id="window-location-href">window.location.href</button>
       </p>
     </div>
 
     <script>
-      let sub;
+      document.querySelector("#name").textContent = window.name;
+
       document.querySelector("#window-open").addEventListener("click", () => {
-        sub = window.open("subsub.html", "subsub");
-        console.log(sub);
+        window.open("subsub.html", "windowA");
       });
 
-      document.querySelector("#window-location-href").addEventListener("click", () => {
-        window.location.href = "subsub.html";
-      });
 
     </script>
   </body>
