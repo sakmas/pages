@@ -7,18 +7,17 @@
   </head>
   <body>
     <div class="container">
-      <p>Sub Window</p>
+      <p>起動画面</p>
+      <p>window名: <span id="window-name"></span></p>
       <p>
-        <button id="window-openA">window.open [WindowA]</button>
-      </p>
-      <p>
-        <button id="window-openB">window.open [WindowB]</button>
+        <button id="window-open">window.open</button>
       </p>
       <p>Cookie: <span id="cookie"></p>
     </div>
 
     <script>
-
+      var cookieKey = "sub_window";
+      var windowName = window.location.href.match(new RegExp("[?&]window=(.*?)(&|$|#)"))[1];
 
       function getCookie(key) {
         return document.cookie.replace(new RegExp("(?:(?:^|.*;\\s*)" + key + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1");
@@ -42,31 +41,24 @@
       }
 
       function isOpened(windowName) {
-        return getCookie("sub_window").split(",").indexOf(windowName) >= 0;
+        return getCookie(cookieKey).split(",").indexOf(windowName) >= 0;
       }
 
       function openSubWindow(target, name) {
-        addCookie("sub_window", name);
+        addCookie(cookieKey, name);
         window.open(target, name);
       }
 
-
-      document.querySelector("#window-openA").addEventListener("click", () => {
-        if (!isOpened("windowA")) {
-          openSubWindow("subsub.html", "windowA");
-          console.log(document.cookie);
+      document.querySelector("#window-open").addEventListener("click", () => {
+        if (!isOpened(windowName)) {
+          openSubWindow("subsub.html", windowName);
         }
+        window.close();
       });
 
-      document.querySelector("#window-openB").addEventListener("click", () => {
-        if (!isOpened("windowB")) {
-          openSubWindow("subsub.html", "windowB");
-          console.log(document.cookie);
-        }
-      });
 
+      document.querySelector("#window-name").textContent = windowName;
       document.querySelector("#cookie").textContent = document.cookie;
-
     </script>
   </body>
 </html>

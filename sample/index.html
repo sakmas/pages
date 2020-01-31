@@ -8,13 +8,20 @@
   <body>
     <div class="container">
       <p>
-        <button id="window-open">window.open</button>
+        <button id="window-openA">window.open [WindowA]</button>
+      </p>
+      <p>
+        <button id="window-openB">window.open [WindowB]</button>
       </p>
     </div>
 
     <script>
-      document.querySelector("#window-open").addEventListener("click", () => {
-        window.open("sub.html", "");
+      document.querySelector("#window-openA").addEventListener("click", function() {
+        window.open("sub.html?window=windowA", "");
+      });
+
+      document.querySelector("#window-openB").addEventListener("click", function() {
+        window.open("sub.html?window=windowB", "");
       });
 
     </script>
