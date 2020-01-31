@@ -41,15 +41,16 @@
       }
 
       function isOpened(windowName) {
-        getCookie("sub_window").split(",").indexOf(windowName) >= 0;
+        return getCookie("sub_window").split(",").indexOf(windowName) >= 0;
       }
 
       function openSubWindow(target, name) {
         addCookie("sub_window", name);
-        var subWindow = window.open(target, name);
-        subWindow.addEventListener("beforeunload", function() {
-          removeCookie("sub_window", name);
-        });
+        window.open(target, name);
+//        var subWindow = window.open(target, name);
+//        subWindow.addEventListener("beforeunload", function() {
+//          removeCookie("sub_window", name);
+//        });
       }
 
 

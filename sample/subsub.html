@@ -12,7 +12,22 @@
   </body>
 
   <script>
+    function getCookie(key) {
+      return document.cookie.replace(new RegExp("(?:(?:^|.*;\\s*)" + key + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1");
+    }
+
+    function removeCookie(key, value) {
+      var cookie = getCookie(key).split(",");
+      cookie = cookie.filter(function(val) { return val != value });
+      document.cookie = key + "=" + cookie.join(",");
+    }
+
+    subWindow.addEventListener("beforeunload", function() {
+      removeCookie("sub_window", name);
+    });
+
     document.querySelector("#name").textContent = window.name;
+
     
   </script>
 </html>
