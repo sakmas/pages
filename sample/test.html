@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>cookie del</title>
+  </head>
+  <body>
+    <div class="container">
+      <p>cookie del</p>
+    </div>
+
+    <script>
+      function getCookie(key) {
+        return document.cookie.replace(new RegExp("(?:(?:^|.*;\\s*)" + key + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1");
+      }
+
+      function addCookie(key, value) {
+        var values = getCookie(key);
+        if (values === "") {
+          values = [value];
+        } else {
+          var values = values.split(",");
+          values.push(value);
+        }
+        document.cookie = key + "=" + values.join(",")
+      }
+
+      addCookie("test","valval");
+
+    </script>
+  </body>
+</html>
