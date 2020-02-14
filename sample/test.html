@@ -27,7 +27,7 @@
         document.cookie = key + "=" + values.join(",")
       }
 
-      document.querySelector("#btn").addEventListener("click", => () {
+      document.querySelector("#btn").addEventListener("click", () => {
         addCookie("test","valval");
       });
 
