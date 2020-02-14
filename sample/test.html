@@ -9,6 +9,7 @@
     <div class="container">
       <p>cookie del</p>
       <button id="btn">create cookie</button>
+      <p id="ck"></p>
     </div>
 
     <script>
@@ -30,6 +31,8 @@
       document.querySelector("#btn").addEventListener("click", () => {
         addCookie("test","valval");
       });
+
+      document.querySelector("#ck").textContent = document.cookie;
 
 
     </script>
